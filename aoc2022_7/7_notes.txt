@@ -1,0 +1,21 @@
+read file
+read lines
+
+parsing - while:
+ - if $ = command
+    - ls - def parse_ls()
+        - next lines up to the next $ is the inside of the
+          current dir
+        - if dir then add the subdir to the current dir
+        - if starts with int - add file to curr dir
+    - cd - def parse_cd()
+        - (dirname) change current dir to that subdir
+        - (..) change dir to the parent dir
+            - recursive function to find the parent dir
+
+sum of the sizes of all subdirs and the root - def sum_of_root
+
+total size of dirs up to 100000 in size
+    
+        
+    
