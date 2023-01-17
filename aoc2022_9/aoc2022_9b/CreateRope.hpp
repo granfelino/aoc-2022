@@ -35,6 +35,14 @@ void CreateRope::create_rope()
     
 
     // connecting the rope pieces together
+    
+    /*
+        The below code throws a following error:
+        "argument of type "Rope *" is incompatible 
+        with parameter of type "Rope *"C/C++(167)"
+
+        I do not know how to resolve this yet.
+    */
     this->head->set_next_ptr(this->body_ptr->at(0));
 }
 
