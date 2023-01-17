@@ -6,7 +6,7 @@ Class Tail, child class of Rope
 #include <array>
 #include <set>
 #include <assert.h>
-#include <Rope.cpp>
+#include <Rope.hpp>
 
 using namespace std;
 

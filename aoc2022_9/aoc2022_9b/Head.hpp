@@ -3,28 +3,24 @@ Class Head, child class of Rope
 */
 
 #include <iostream>
+#include <vector>
 #include <array>
-#include <Rope.cpp>
+#include <Rope.hpp>
 
 using namespace std;
 
 class Head : Rope
 {
 public:
-    Rope *next_ptr, *prev_ptr;
+    Rope *prev_ptr, *next_ptr;
     array<int, 2> position;
 
-    
-    Head()
-    {
-        this->position = {0, 0};
-        this->prev_ptr = nullptr;
-        this->next_ptr = nullptr;
-    }
+    Head() : Rope() {}
 
     void move(array<int, 2> move);
+    void set_next_ptr(Rope* next);
 
-    };
+};
 
 
 void Head::move(array<int, 2> move)
@@ -58,3 +54,8 @@ void Head::move(array<int, 2> move)
     }
 }
 
+
+void Head::set_next_ptr(Rope* next)
+{
+    this->next_ptr = next;
+}
