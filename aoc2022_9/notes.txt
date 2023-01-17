@@ -1,0 +1,35 @@
+- vector<string> get_input()
+- int solution() - returns count of all places the tail has been to;
+    - static int h_pos[2], t_pos[2];
+    - void parse_line(string line, *int h_move) - parses an input line 
+                               - no_of_steps can be 1 or 2 digits (check line length);
+                               - puts direction and number of steps in the array of the ptr;
+    - void move_head(int direction, int no_of_steps) - iterates over the no_of_steps  
+                                                and moves the head one step at a time;
+                                                - calls the move_tail() to move the tail 
+                                                accordingly
+    - void move_tail(int head_x, int head_y) - calculates the offset of tail's positon
+                                             in relation to head's position and changes
+                                             tail's position accordingly
+                                             - checks for unique_tail_positions based on
+                                             tail_x and tail_y
+
+      $ # $
+    $ 0 0 0 $
+    # 0 T 0 #
+    $ 0 0 0 $
+      $ # $
+    
+    T - tail AND 0
+    0 - head's position does not cause tail's movement
+    # - head's position causes tail's horizontal/vertical movement
+    $ - head's position causes tail's diagonal movement
+
+
+    2nd part:
+    - class rope_piece which has:
+      - ptr to previous piece
+      - ptr to next piece
+      - function to move it accordingly to previous' offset
+        and which calls the same function in the next rope piece
+        
