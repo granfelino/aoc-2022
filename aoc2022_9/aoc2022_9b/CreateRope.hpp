@@ -12,16 +12,16 @@ using namespace std;
 class CreateRope 
 {
     public:
-    Head* head;
-    Tail* tail;
-    vector<Rope*>* body_ptr;
-
     CreateRope() 
     {
         create_rope();
     }
-
     void create_rope();
+
+
+    Head* head;
+    Tail* tail;
+    vector<Rope*>* body_ptr;
 };
 
 
@@ -40,6 +40,7 @@ void CreateRope::create_rope()
 
     // connecting the rope pieces together
     this->head->next_ptr = this->body_ptr->at(0);
+    this->tail->prev_ptr = this->body_ptr->at(7);
 
     for (int i = 0; i < 8; ++i)
     {
@@ -56,7 +57,6 @@ void CreateRope::create_rope()
         ;
     }
 
-    this->tail->prev_ptr = this->body_ptr->at(7);
 }
 
 

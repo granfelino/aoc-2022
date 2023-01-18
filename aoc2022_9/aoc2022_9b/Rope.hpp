@@ -14,10 +14,7 @@ using namespace std;
 
 class Rope
 {
-public:
-    Rope *next_ptr, *prev_ptr;
-    array<int, 2> position;
-
+    public:
     Rope()
     {
         this->position = {0, 0};
@@ -25,8 +22,11 @@ public:
         this->next_ptr = nullptr;
     }
 
+    
     void virtual move();
     array<int, 2> get_offset();
+    Rope *next_ptr, *prev_ptr;
+    array<int, 2> position;
 };
 
 void Rope::move()

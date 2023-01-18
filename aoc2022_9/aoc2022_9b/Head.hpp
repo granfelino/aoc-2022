@@ -15,14 +15,15 @@ using namespace std;
 
 class Head : Rope
 {
-public:
-    Rope *prev_ptr, *next_ptr;
-    array<int, 2> position;
-
+    public:
     Head() : Rope() {}
 
     void move(array<int, 2> move);
     void set_next_ptr(Rope* next);
+    
+    
+    Rope *prev_ptr, *next_ptr;
+    array<int, 2> position;
 
 };
 

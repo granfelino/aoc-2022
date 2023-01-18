@@ -17,20 +17,20 @@ using namespace std;
 
 class Tail : public Rope
 {
-public:
-    set<array<int, 2>> tail_places;
-    int     tail_places_count;
-
-    void    add_place(array<int, 2> place);
-    void    set_places_count();
-    int     get_places_count();
-    void    move();
-
+    public:
     Tail() : Rope() 
     {
         // add {0, 0} to places at the start
         this->add_place(this->position);
     }
+    void    add_place(array<int, 2> place);
+    void    set_places_count();
+    int     get_places_count();
+    void    move();
+    
+    
+    set<array<int, 2>> tail_places;
+    int     tail_places_count;
 };
 
 
