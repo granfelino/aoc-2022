@@ -1,3 +1,7 @@
+#ifndef ROPE_HPP
+#define ROPE_HPP
+
+
 /*
 Rope class
 */
@@ -111,3 +115,6 @@ array<int, 2> Rope::get_offset()
 
     return offset;
 }
+
+
+#endif

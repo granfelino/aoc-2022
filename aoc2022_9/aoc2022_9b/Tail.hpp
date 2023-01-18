@@ -1,3 +1,7 @@
+#ifndef TAIL_HPP
+#define TAIL_HPP    
+
+
 /*
 Class Tail, child class of Rope
 */
@@ -6,7 +10,7 @@ Class Tail, child class of Rope
 #include <array>
 #include <set>
 #include <assert.h>
-#include <Rope.hpp>
+#include "Rope.hpp"
 
 using namespace std;
 
@@ -122,3 +126,6 @@ void Tail::move()
 
     Tail::add_place(this->position);
 }
+
+
+#endif

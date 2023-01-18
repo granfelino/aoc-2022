@@ -1,8 +1,12 @@
+#ifndef CREATE_ROPE_HPP
+#define CREATE_ROPE_HPP
+
+
 #include <iostream>
 #include <vector>
-#include <Head.hpp>
-#include <Tail.hpp>
-#include <Rope.hpp>
+#include "Head.hpp"
+#include "Tail.hpp"
+#include "Rope.hpp"
 using namespace std;
 
 class CreateRope 
@@ -35,14 +39,25 @@ void CreateRope::create_rope()
     
 
     // connecting the rope pieces together
-    
-    /*
-        The below code throws a following error:
-        "argument of type "Rope *" is incompatible 
-        with parameter of type "Rope *"C/C++(167)"
+    this->head->next_ptr = this->body_ptr->at(0);
 
-        I do not know how to resolve this yet.
-    */
-    this->head->set_next_ptr(this->body_ptr->at(0));
+    for (int i = 0; i < 8; ++i)
+    {
+        // connect backwards
+        this->body_ptr->at(i)->prev_ptr = this->body_ptr->at(i)->prev_ptr == nullptr ?
+                                          this->body_ptr->at(i-1) : 
+                                          this->body_ptr->at(i)->prev_ptr
+        ;
+
+        // connect forward
+        this->body_ptr->at(i)->next_ptr = this->body_ptr->at(i)->next_ptr == nullptr ?
+                                          this->body_ptr->at(i+1) : 
+                                          this->body_ptr->at(i)->next_ptr
+        ;
+    }
+
+    this->tail->prev_ptr = this->body_ptr->at(7);
 }
 
+
+#endif

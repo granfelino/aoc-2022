@@ -1,3 +1,7 @@
+#ifndef HEAD_HPP
+#define HEAD_HPP
+
+
 /*
 Class Head, child class of Rope
 */
@@ -5,7 +9,7 @@ Class Head, child class of Rope
 #include <iostream>
 #include <vector>
 #include <array>
-#include <Rope.hpp>
+#include "Rope.hpp"
 
 using namespace std;
 
@@ -59,3 +63,6 @@ void Head::set_next_ptr(Rope* next)
 {
     this->next_ptr = next;
 }
+
+
+#endif
