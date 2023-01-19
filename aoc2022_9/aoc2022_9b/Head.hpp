@@ -13,16 +13,13 @@ Class Head, child class of Rope
 
 using namespace std;
 
-class Head : Rope
+class Head : public Rope
 {
     public:
     Head() : Rope() {}
-
+    ~Head() {};
     void move(array<int, 2> move);
-    void set_next_ptr(Rope* next);
     
-    
-    Rope *prev_ptr, *next_ptr;
     array<int, 2> position;
 
 };
@@ -57,12 +54,6 @@ void Head::move(array<int, 2> move)
             this->next_ptr->move();
         }
     }
-}
-
-
-void Head::set_next_ptr(Rope* next)
-{
-    this->next_ptr = next;
 }
 
 

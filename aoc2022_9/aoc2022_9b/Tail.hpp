@@ -23,6 +23,7 @@ class Tail : public Rope
         // add {0, 0} to places at the start
         this->add_place(this->position);
     }
+    ~Tail() {};
     void    add_place(array<int, 2> place);
     void    set_places_count();
     int     get_places_count();
@@ -47,6 +48,7 @@ void Tail::set_places_count()
 
 
 int Tail::get_places_count() {
+    set_places_count();
     return this->tail_places_count;
 }
 

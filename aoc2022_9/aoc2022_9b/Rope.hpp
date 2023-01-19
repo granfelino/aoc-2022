@@ -21,10 +21,11 @@ class Rope
         this->prev_ptr = nullptr;
         this->next_ptr = nullptr;
     }
-
+    ~Rope() {};
     
     void virtual move();
     array<int, 2> get_offset();
+
     Rope *next_ptr, *prev_ptr;
     array<int, 2> position;
 };

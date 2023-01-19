@@ -16,6 +16,7 @@ class CreateRope
     {
         create_rope();
     }
+    ~CreateRope() {};
     void create_rope();
 
 
@@ -38,12 +39,28 @@ void CreateRope::create_rope()
     }
     
 
-    // connecting the rope pieces together
+    // connecting head and tail to the body
     this->head->next_ptr = this->body_ptr->at(0);
     this->tail->prev_ptr = this->body_ptr->at(7);
 
+    // connecting the body to itself and to head and tail
     for (int i = 0; i < 8; ++i)
     {
+        // connecting the first body part to the head and to the next element
+        if (i == 0)
+        {   
+            this->body_ptr->at(i)->next_ptr = this->body_ptr->at(i+1);
+            this->body_ptr->at(i)->prev_ptr = this->head;
+            continue;
+        } else if (i == 7)
+        {
+            this->body_ptr->at(i)->prev_ptr = this->body_ptr->at(i-1);
+            this->body_ptr->at(i)->next_ptr = this->tail;
+
+            continue;
+        }
+
+        // case for other body parts
         // connect backwards
         this->body_ptr->at(i)->prev_ptr = this->body_ptr->at(i)->prev_ptr == nullptr ?
                                           this->body_ptr->at(i-1) : 
