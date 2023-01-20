@@ -21,7 +21,7 @@ class Rope
         this->prev_ptr = nullptr;
         this->next_ptr = nullptr;
     }
-    ~Rope() {};
+    // ~Rope() {};
     
     void virtual move();
     array<int, 2> get_offset();
@@ -109,8 +109,16 @@ void Rope::move()
 array<int, 2> Rope::get_offset()
 {
     array<int, 2> offset = {};
-    offset[0] = this->prev_ptr->position[0] - this->position[0];
-    offset[1] = this->prev_ptr->position[1] - this->position[1];
+    cout << "previous part's offset is: " 
+            << this->prev_ptr->position[0]
+            << this->prev_ptr->position[1]
+            << endl
+    ;
+
+    int prev_x = this->prev_ptr->position[0];
+    int prev_y = this->prev_ptr->position[1];  
+    offset[0] =  prev_x - this->position[0];
+    offset[1] =  prev_y - this->position[1];
     assert(abs(offset[0]) <= 2);
     assert(abs(offset[1]) <= 2);
 

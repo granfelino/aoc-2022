@@ -17,7 +17,7 @@ class Head : public Rope
 {
     public:
     Head() : Rope() {}
-    ~Head() {};
+    // ~Head() {};
     void move(array<int, 2> move);
     
     array<int, 2> position;

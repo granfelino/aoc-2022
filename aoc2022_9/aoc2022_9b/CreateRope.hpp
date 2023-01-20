@@ -16,7 +16,10 @@ class CreateRope
     {
         create_rope();
     }
-    ~CreateRope() {};
+    // ~CreateRope() {};
+    Head* get_head_ptr();
+    Tail* get_tail_ptr();
+    vector<Rope*>* get_body_ptr();
     void create_rope();
 
 
@@ -25,6 +28,12 @@ class CreateRope
     vector<Rope*>* body_ptr;
 };
 
+
+Head* CreateRope::get_head_ptr() { return this->head; }
+
+Tail* CreateRope::get_tail_ptr() { return this->tail; }
+
+vector<Rope*>* CreateRope::get_body_ptr() { return this->body_ptr; }
 
 void CreateRope::create_rope() 
 {
@@ -52,12 +61,13 @@ void CreateRope::create_rope()
             this->body_ptr->at(i)->next_ptr = this->body_ptr->at(i+1);
             this->body_ptr->at(i)->prev_ptr = this->head;
             continue;
+
         } else if (i == 7)
         {
             this->body_ptr->at(i)->prev_ptr = this->body_ptr->at(i-1);
             this->body_ptr->at(i)->next_ptr = this->tail;
-
             continue;
+
         }
 
         // case for other body parts
