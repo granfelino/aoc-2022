@@ -24,6 +24,7 @@ class Tail : public Rope
         this->add_place(this->position);
     }
     // ~Tail() {};
+    void    set_prev_ptr(Rope* rope_part);
     void    add_place(array<int, 2> place);
     void    set_places_count();
     int     get_places_count();
@@ -34,6 +35,8 @@ class Tail : public Rope
     int     tail_places_count;
 };
 
+
+void Tail::set_prev_ptr(Rope* rope_part) { this->prev_ptr = rope_part; }
 
 void Tail::add_place(array<int, 2> place)
 {
