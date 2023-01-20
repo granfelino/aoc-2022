@@ -28,6 +28,8 @@ class Rope
     Rope* get_next_ptr();
     Rope* get_prev_ptr();
     array<int, 2> get_position();
+    void set_next_ptr(Rope* rope_part);
+    void set_prev_ptr(Rope* rope_part);
 
     Rope *next_ptr, *prev_ptr;
     array<int, 2> position;
@@ -38,6 +40,11 @@ Rope* Rope::get_next_ptr() { return this->next_ptr; }
 Rope* Rope::get_prev_ptr() { return this->prev_ptr; }
 
 array<int, 2> Rope::get_position() { return this->position; }
+
+void Rope::set_next_ptr(Rope* rope_part) { this->next_ptr = rope_part; }
+
+void Rope::set_prev_ptr(Rope* rope_part) { this->prev_ptr = rope_part; }
+
 
 void Rope::move()
 {

@@ -20,6 +20,7 @@ class CreateRope
     Head* get_head_ptr();
     Tail* get_tail_ptr();
     vector<Rope*>* get_body_ptr();
+    Rope* get_body_part_ptr(int pos);
     void create_rope();
 
 
@@ -35,6 +36,8 @@ Tail* CreateRope::get_tail_ptr() { return this->tail; }
 
 vector<Rope*>* CreateRope::get_body_ptr() { return this->body_ptr; }
 
+Rope* CreateRope::get_body_part_ptr(int pos) { return this->body_ptr->at(pos); }
+
 void CreateRope::create_rope() 
 {
     // allocating rope parts to memory
@@ -49,8 +52,8 @@ void CreateRope::create_rope()
     
 
     // connecting head and tail to the body
-    this->head->next_ptr = this->body_ptr->at(0);
-    this->tail->prev_ptr = this->body_ptr->at(7);
+    this->head->set_next_ptr(this->body_ptr->at(0));
+    this->tail->set_prev_ptr(this->body_ptr->at(7));
 
     // connecting the body to itself and to head and tail
     for (int i = 0; i < 8; ++i)
@@ -58,8 +61,8 @@ void CreateRope::create_rope()
         // connecting the first body part to the head and to the next element
         if (i == 0)
         {   
-            this->body_ptr->at(i)->next_ptr = this->body_ptr->at(i+1);
-            this->body_ptr->at(i)->prev_ptr = this->head;
+            this->body_ptr->at(i)->set_next_ptr(this->get_body_part_ptr(i+1));
+            this->body_ptr->at(i)->prev_ptr = this->head; // TODO get head through getter and so on
             continue;
 
         } else if (i == 7)
