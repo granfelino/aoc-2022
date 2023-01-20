@@ -19,11 +19,13 @@ class Head : public Rope
     Head() : Rope() {}
     // ~Head() {};
     void move(array<int, 2> move);
-    
+    void set_next_ptr(Rope* rope_part);
+
     array<int, 2> position;
 
 };
 
+void Head::set_next_ptr(Rope* rope_part) { this->next_ptr = rope_part; } 
 
 void Head::move(array<int, 2> move)
 {
