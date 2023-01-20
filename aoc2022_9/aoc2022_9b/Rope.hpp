@@ -25,10 +25,19 @@ class Rope
     
     void virtual move();
     array<int, 2> get_offset();
+    Rope* get_next_ptr();
+    Rope* get_prev_ptr();
+    array<int, 2> get_position();
 
     Rope *next_ptr, *prev_ptr;
     array<int, 2> position;
 };
+
+Rope* Rope::get_next_ptr() { return this->next_ptr; }
+
+Rope* Rope::get_prev_ptr() { return this->prev_ptr; }
+
+array<int, 2> Rope::get_position() { return this->position; }
 
 void Rope::move()
 {
