@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-
 // DEFINING A ROPE PART AND ALL THE FUNCTIONS TO MOVE THE BODY PARTS
 typedef struct rope_part rope_part;
 
@@ -206,6 +205,7 @@ void rope_push(rope_part* head)
     current->next_part->position[0] = 0;
     current->next_part->position[1] = 0;
 }
+
 
 void free_rope(rope_part* head)
 {
