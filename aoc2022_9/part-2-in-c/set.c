@@ -84,6 +84,11 @@ void set_print(node* head)
 }
 
 
+// void set_handler(int* pos_array) first run initializes the set and stores a pointer to it in a static variable
+// later on the function is called to call the set_push() function to store unique tail positions
+// the initialization part of the function calls the int set_return_size(node* set_ptr=NULL) function which will
+// store the pointer to the set and return size of it when called next time
+
 /*
 int main()
 {   
