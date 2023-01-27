@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "rope.h"
+#include "set.h"
 
 int main()
 {

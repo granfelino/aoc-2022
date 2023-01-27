@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include "set.h"
 
 // DEFINING A ROPE PART AND ALL THE FUNCTIONS TO MOVE THE BODY PARTS
 typedef struct rope_part rope_part;
@@ -27,7 +28,7 @@ void get_offset(int* buf, rope_part* part, rope_part* prev)
 
 
 // MOVE THE INNER PART OF THE ROPE BASED ON THE OFFSET IT HAS TO THE PART AHEAD
-void move_inner_rope_part(rope_part* part)
+void move_inner_rope_part(rope_part* part, node* set_ptr)
 {
 	int offset[2];
 	get_offset(offset, part, part->prev_part);
@@ -100,16 +101,23 @@ void move_inner_rope_part(rope_part* part)
         }
     }
     printf("body part moved; position: %d, %d\n", part->position[0], part->position[1]);
-    
+
     // MOVE THE NEXT ROPE PART IF IT EXISTS
-    if (part->next_part != NULL) move_inner_rope_part(part->next_part);
-    else printf("tail position changed to: %d, %d\n", part->position[0], part->position[1]);
+    if (part->next_part != NULL)
+    {
+        move_inner_rope_part(part->next_part, set_ptr);
+    }
+    else
+    {
+        printf("tail position changed to: %d, %d\n", part->position[0], part->position[1]);
+        set_push(set_ptr, part->position);
+    }
 }
 
 
 // MOVE THE HEAD WHICH THEN WILL MOVE THE NEXT ROPE PART
 
-void move_head(rope_part* head, int direction, int no_steps)
+void move_head(rope_part* head, int direction, int no_steps, node* set_ptr)
 {
     if (head->prev_part != NULL)
     {
@@ -123,25 +131,25 @@ void move_head(rope_part* head, int direction, int no_steps)
         {
             // up
             ++head->position[1];
-            move_inner_rope_part(head->next_part);
+            move_inner_rope_part(head->next_part, set_ptr);
         }
         else if (direction == 1)
         {
             // right
             ++head->position[0];
-            move_inner_rope_part(head->next_part);
+            move_inner_rope_part(head->next_part, set_ptr);
         }
         else if (direction == 2)
         {
             // down
             --head->position[1];
-            move_inner_rope_part(head->next_part);
+            move_inner_rope_part(head->next_part, set_ptr);
         }
         else if (direction == 3)
         {
             // left
             --head->position[0];
-            move_inner_rope_part(head->next_part);
+            move_inner_rope_part(head->next_part, set_ptr);
         }
     }
 }
@@ -223,4 +231,3 @@ void free_rope(rope_part* head)
     printf("freed the whole rope structure from memory\n");
      
 }
-

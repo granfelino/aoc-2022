@@ -9,9 +9,26 @@ struct node
   node* next;
 };
 
+node* set_alloc()
+{
+    static node* set = NULL;
+    if (!set)
+    {
+        set = (node*) malloc(sizeof(node));
+        if (!set)
+        {
+            printf("lack of memory; set not allocated\n");
+            assert(set);
+        }
+    }
+    return set;
+}
+
+
+
 node* set_init(int* first_entry)
 {
-    node* head = (node*) malloc(sizeof(node));
+    node* head = set_alloc();
     if (head == NULL) 
     {
         printf("lack of memory; did not create a set node\n");
@@ -82,7 +99,6 @@ void set_print(node* head)
     
     printf("(%d, %d) ; ", current->val[0], current->val[1]);    
 }
-
 
 // void set_handler(int* pos_array) first run initializes the set and stores a pointer to it in a static variable
 // later on the function is called to call the set_push() function to store unique tail positions
