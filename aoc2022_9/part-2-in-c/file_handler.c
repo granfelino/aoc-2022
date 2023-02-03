@@ -2,47 +2,36 @@
 // Created by granfelino on 27/01/23.
 //
 
-#include "file_handler.h"
+//#include "file_handler.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-
-char* read_f(char* arr, int* size, FILE* file)
+long fill_array(char const *path, char **buffer)
 {
-    file = fopen("input.txt", "rb");
-    if (!file) fclose(file), perror("file not read");
+    FILE *file;
+    int cursor;
+    long offset;
+    size_t fsize;
 
-    long lSize;
-    char* buffer;
+    /* open the file and return -1L if file wasn't opened */
+    file = fopen(path, "r");
+    if (file == NULL) return -1L;
 
-    fseek(file, 0, SEEK_END);
-    lSize = ftell(file);
+    /* seek the end of the file */
+    cursor = fseek(file, 0L, SEEK_END);
+    if (cursor != 0) return -1L;
+
+    if ((offset = ftell(file)) < 0) return -1L;
+    fsize = (size_t) offset;
+
+    *buffer = malloc(fsize + 1);
+    if (buffer == NULL) return -1;
+
     rewind(file);
-
-    buffer = calloc(sizeof(char), lSize+1);
-    if (!buffer)
-    {
-        fclose(file);
-        fputs("lack of memory for char array\n", stderr);
-        exit(1);
-    }
-
-    if (fread(buffer, lSize+1, 1, file) != lSize+1)
-    {
-        fclose(file);
-        fputs("error reading a file into the array", stderr);
-        exit(1);
-    }
-
-    if(EOF == fclose(file))
-    {
-        free(buffer);
-    }
 
 }
 
 int main()
 {
-    FILE* file = file_open("../input.txt");
-    read_f(file);
+    return 0;
 }

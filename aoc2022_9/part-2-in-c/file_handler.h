@@ -6,6 +6,6 @@
 #define PART_2_IN_C_FILE_HANDLER_H
 #include <stdio.h>
 
-char* read_f(char* arr, int* size, FILE* file_ptr);
+int read_f(char* buffer);
 
 #endif //PART_2_IN_C_FILE_HANDLER_H
