@@ -34,7 +34,7 @@ int main()
     // main loop
     while (main_loop_break)
     {
-        file_yield_move_info(file, move_info);
+        file_yield_move_info(file, move_info, &main_loop_break);
         move_head(head, move_info[0], move_info[1], set);
     }
 

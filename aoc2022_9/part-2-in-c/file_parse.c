@@ -47,7 +47,7 @@ void file_close(FILE *file)
 }
 
 
-void file_yield_move_info(FILE *file, int *file_move_info)
+void file_yield_move_info(FILE *file, int *file_move_info, int *main_loop_break)
 {
     // define variables
     int file_string_size;
@@ -68,12 +68,16 @@ void file_yield_move_info(FILE *file, int *file_move_info)
     file_string_size = 0;
     c = getc(file);
 
+    // if EOF break main loop
+    if (feof(file)) *main_loop_break = 1;
+
 
     // count chars in the string
     while ( (c != '\n') )
     {
         ++file_string_size;
         c = getc(file);
+        if (feof(file)) *main_loop_break = 1;
     }
 
     // set the file to the starting position; exit if fails
@@ -90,6 +94,8 @@ void file_yield_move_info(FILE *file, int *file_move_info)
         for (int i = 0; i < file_string_size; ++i)
         {
             c = getc(file);
+            if (feof(file)) *main_loop_break = 1;
+
             if (i == 0) file_move_info[0] = get_direction(c);
             if (i == 2) file_move_info[1] = c - '0';
         }
@@ -99,13 +105,18 @@ void file_yield_move_info(FILE *file, int *file_move_info)
         for (int i = 0; i < file_string_size; ++i)
         {
             c = getc(file);
+            if (feof(file)) *main_loop_break = 1;
+
             if (i == 0) file_move_info[0] = get_direction(c);
             if (i == 2) file_move_info[1] += (10 * (c - '0'));
             if (i == 3) file_move_info[1] += (c - '0');
         }
     }
 
+    // push file one byte forward; free file_strting position pointer
     c = getc(file);
+    if (feof(file)) *main_loop_break = 1;
+
     free(file_string_starting_position);
 
 }
