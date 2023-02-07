@@ -12,7 +12,7 @@ int get_direction(char dir)
     else if (dir == 'L') return 3;
     else
     {
-        fprintf(stderr, "Undefined character passed to get_direction() at: ", __FILE__, __LINE__);
+        fprintf(stderr, "Undefined character passed to get_direction() at: %s, %d", __FILE__, __LINE__);
         exit(EXIT_FAILURE);
     }
 }
@@ -26,7 +26,7 @@ FILE* file_open(char* const path)
     // if opening the file fails return failure
     if (file == NULL)
     {
-        fprintf(stderr, "fopen failed to open the file at: ", __FILE__, __LINE__);
+        fprintf(stderr, "fopen failed to open the file at: %s, %d", __FILE__, __LINE__);
         exit(EXIT_FAILURE);
     }
 
@@ -37,7 +37,7 @@ void file_close(FILE *file)
 {
     if (fclose(file) == EOF)
     {
-        fprintf(stderr, "fclose() failed to close the file at: ", __FILE__, __LINE__);
+        fprintf(stderr, "fclose() failed to close the file at: %s, %d", __FILE__, __LINE__);
         exit(EXIT_FAILURE);
     }
     else
@@ -50,24 +50,27 @@ void file_close(FILE *file)
 void file_yield_move_info(FILE *file, int *file_move_info)
 {
     // define variables
-//  int file_move_info[]; // it gets initalized down the function
     int file_string_size;
     char c;
-    fpos_t *file_string_starting_position;
 
-    // initialize variables
-    file_string_size = 0;
-    c = getc(file);
+
+    fpos_t *file_string_starting_position = malloc(sizeof(fpos_t));
 
     // get file starting position to rewind to; exit if fails
     if (fgetpos(file, file_string_starting_position) != 0)
     {
-        fprintf(stderr, "fgetpos() failed to get position at: ", __FILE__, __LINE__);
+        fprintf(stderr, "fgetpos() failed to get position at: %s, %d", __FILE__, __LINE__);
         exit(EXIT_FAILURE);
     }
 
+
+    // initialize the rest of variables
+    file_string_size = 0;
+    c = getc(file);
+
+
     // count chars in the string
-    while ( (c != '\n') || (c != EOF) )
+    while ( (c != '\n') )
     {
         ++file_string_size;
         c = getc(file);
@@ -76,7 +79,7 @@ void file_yield_move_info(FILE *file, int *file_move_info)
     // set the file to the starting position; exit if fails
     if (fsetpos(file, file_string_starting_position) != 0)
     {
-        fprintf(stderr, "fsetpos() failed to set position to initial at: ", __FILE__, __LINE__);
+        fprintf(stderr, "fsetpos() failed to set position to initial at: %s, %d", __FILE__, __LINE__);
         exit(EXIT_FAILURE);
     }
 
@@ -102,21 +105,31 @@ void file_yield_move_info(FILE *file, int *file_move_info)
         }
     }
 
+    c = getc(file);
+    free(file_string_starting_position);
+
 }
 
 
 
-
-int main()
-{
-    int *move_info = malloc(sizeof(int)*2);
-    FILE *file = file_open("input.txt");
-
-    file_yield_move_info(file, move_info);
-
-    file_close(file);
-
-    printf("yielded move info is (%d, %d)\n", move_info[0], move_info[1]);
-
-    return 0;
-}
+//
+//int main()
+//{
+//    int *move_info = malloc(sizeof(int)*2);
+//    FILE *file = file_open("input.txt");
+//
+//    file_yield_move_info(file, move_info);
+//    printf("yielded move info is (%d, %d)\n", move_info[0], move_info[1]);
+//
+//    file_yield_move_info(file, move_info);
+//    printf("yielded move info is (%d, %d)\n", move_info[0], move_info[1]);
+//
+//    file_yield_move_info(file, move_info);
+//    printf("yielded move info is (%d, %d)\n", move_info[0], move_info[1]);
+//
+//    file_close(file);
+//
+//
+//
+//    return 0;
+//}
